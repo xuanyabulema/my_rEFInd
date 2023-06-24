@@ -1,0 +1,626 @@
+#
+# refind.conf
+# 我把rEFInd的设置菜单翻译成了中文（在下莫老师）
+#
+
+# 主菜单选项的自动启动等待时间，可以设置为任意数值，单位为秒
+# 如果想禁用自动启动，可以将其设置为 -1
+# 读秒的时候按任意键可以终止自动启动
+#
+timeout 20
+
+# 设置日志级别，设置为 0 时，rEFInd 不记录其操作
+# 当设置为 1 或以上时，rEFInd会创建一个名为 refind.log 的日志文件
+# 它会在 ESP 分区记录 rEFInd 的日志信息
+# 值越高，记录的信息越详细，最大值为4
+#
+#log_level 1
+
+# 通常来说，当读秒时间结束后，rEFInd 会自动启动
+# 但是如果你取消掉下方代码前的注释
+# rEFInd 将会变为在读秒结束后关闭计算机
+# 注意：这会导致有些计算机不停的挂起或重新启动！
+# 默认为不开启此功能
+#
+#shutdown_after_timeout
+
+# 是否将 rEFInd 的特定变量存储在 NVRAM 中
+# 或是存储在 rEFInd 目录的“vars”子目录中
+# 使用存储在 NVRAM 中可适用于大多数计算机
+# 但是，它会增加主板 NVRAM 的磨损
+# 有问题或 NVRAM 比较旧的话，它可能根本无法工作
+# 此选项仅影响 rEFInd 自己的变量
+# 不会影响安全启动或其他非 rEFInd 引导
+# 默认为 true（开启）
+#
+use_nvram false
+
+# 屏保超时等待时间，单位为秒，超出指定时间没有移动鼠标或使用键盘，屏幕会变为空白
+# 进入屏保后按任意键可以返回
+# 但不包括Shift、Control、Alt这些修饰键
+# 将其设置为任意值，即可启动
+# 默认值为 0，即禁用屏幕保护程序
+#
+#screensaver 300
+
+# 根据个人喜好增加或隐藏主界面上的元素
+# security:
+#  banner=rEFInd 壁纸（内置或通过“banner”加载）
+#  banner      - the rEFInd title banner (built-in or loaded via "banner")
+#  label=单中的启动选项文本标签
+#  label       - boot option text label in the menu
+#  singleuser=删除子菜单选项以在单用户中启动 macOS，仅对 MacOS 生效
+#  singleuser  - remove the submenu options to boot macOS in single-user
+#                or verbose modes; affects ONLY macOS
+#  safemode=删除以“安全模式”启动 macOS 的子菜单选项
+#  safemode    - remove the submenu option to boot macOS in "safe mode"
+#  hwtest=运行 Apple 硬件测试的子菜单选项
+#  hwtest      - the submenu option to run Apple's hardware test
+#  arrows=操作系统选择标记行上的滚动箭头
+#  arrows      - scroll arrows on the OS selection tag line
+#  hints=菜单中的简短命令摘要
+#  hints       - brief command summary in the menu
+#  editor=选项编辑器（按+、F2 或在启动选项菜单上插入）
+#  editor      - the options editor (+, F2, or Insert on boot options menu)
+#  badges=引导选项的设备类型徽章
+#  badges      - device-type badges for boot options
+#  all=以上所有值
+#  all         - all of the above
+#  这些不是默认值，默认是这些元素都有，通过取消代码前的注释来进行修改
+#
+#  单用户
+#hideui singleuser
+#  隐藏所有元素
+#hideui all
+
+# 修改默认存放图标的文件夹名称和路径
+# 当主题找不到图标的时候，会默认使用此文件夹内的图标
+# 可以使用这些格式 ICNS (*.icns), BMP (*.bmp),PNG (*.png), or JPEG (*.jpg or *.jpeg)
+# 使用PNG才能让图标透明
+# 默认为"icons"
+# 通过取消下边代码前的注释来修改
+#
+#icons_dir myicons
+#icons_dir icons/snowy
+
+# 修改默认存放壁纸的文件夹名称和路径
+# 图片左上角的颜色会被用作主菜单背景色
+# 支持 24、8、4 或 1 位色深的图片，支持 PNG 和 JPEG 格式的图片
+# 受底层库的限制；某些文件，可能会不生效
+# 通过取消下边代码前的注释来使用
+#
+#banner hostname.bmp
+#banner mybanner.jpg
+#banner icons/snowy/banner-snowy.png
+
+#  指定如何处理与屏幕分辨率不同的壁纸
+#  可以选择下边两种:
+#  noscale     - 如果太大则裁剪，如果太小则显示黑边
+#  fillscreen   - 填充屏幕
+#  默认为 noscale
+#  通过取消下边代码前的注释来使用
+#
+#banner_scale fillscreen
+
+# 设置图标的大小， 所有图标都是正方形, 因此需要为大小指定一个值
+# The big_icon_size 用于指定第一排的系统引导图标大小
+# small_icon_size 用于指定第二排的选项图标大小
+# 小图标是大图标的1/4大小
+# 如果没有指定图标大小，图标会使用下边的默认值
+# 小图标和大图标的默认值分别为 48 和 128
+# 通过取消下边代码前的注释来使用
+#
+#small_icon_size 96
+#big_icon_size 256
+
+# 设置图标在选择时的背景
+# 大的尺寸为 (144 x 144)，用于第一排系统引导图标
+# 小的尺寸为 (64 x 64) 用于第二排的选项图标
+# 支持 24、8、4 或 1 位色深的图片，支持 PNG 和 ICNS 格式的图片
+# 支持PNG透明图片
+# 通过取消下边代码前的注释来使用
+#
+#selection_big   selection-big.bmp
+#selection_small selection-small.bmp
+
+# 设置用于图形模式下的所有文本的显示字体
+# 为了获得最佳效果，字体必须是带有 alpha 通道的 PNG 透明文件
+# 字体必须包含 ASCII 字母 32-126（以及各种符号），
+# 加上一个要显示的字形以代替此范围外的字母，总共 96 个字母
+# 字体可以是任何大小，但大字体可能会导致显示不规则
+# 默认是rEFInd的内置字体，为Luxi Mono Regular 12号
+# 通过取消下边代码前的注释来使用
+#
+#font myfont.png
+
+# 仅使用文本模式，启用后，会强制让 rEFInd 进入文本模式
+# 将选项值设置为“0”会使用图形模式
+# 不设置值或任何非“0”的值都会导致使用文本模式
+# 默认使用图形模式
+# 通过取消下边代码前的注释来使用
+#
+#textonly
+
+# 设置用于显示的 EFI 文本模式
+# 默认为 1024
+# 通常用不上
+#
+#textmode 2
+
+# 设置屏幕分辨率
+# 设置为“max”，可以使用最大分辨率
+# 默认为 "0 0" (即使用系统默认分辨率，通常为 800x600)
+# 通过取消下边代码前的注释来使用
+#
+#resolution 1024 768
+#resolution 1440 900
+#resolution 3
+#resolution max
+
+# 启用触摸屏支持
+# 需要你的电脑底层硬件支持
+# 与启用鼠标支持功能相互冲突
+# 通过取消下边代码前的注释来使用
+#
+#enable_touch
+
+# 启用鼠标支持
+# 需要你的电脑底层硬件支持
+# 与启用触摸屏支持功能相互冲突
+# 通过取消下边代码前的注释来使用
+#
+#enable_mouse
+
+# 设置鼠标指针大小，单位为像素
+# 默认为 16
+# 通过取消下边代码前的注释来使用
+#
+#mouse_size 16
+
+# 设置鼠标追踪速度， 数字越大代表速度越快
+# 需要先启用鼠标支持
+# 合法值为 1 至 32，默认为 4
+# 通过取消下边代码前的注释来使用
+#
+#mouse_speed 4
+
+# 以图形模式启动指定的操作系统
+# 默认情况下，rEFInd 在启动除 macOS 之外的所有操作系统时，都会切换到文本模式
+# 使用图形模式可以更丝滑的进行过渡
+# 使用图形模式可以减少Linux系统的崩溃问题
+# 文本模式下的操作系统
+# 下边为有效选项:
+#   osx     - macOS
+#   linux   - A Linux kernel with EFI stub loader
+#   elilo   - The ELILO boot loader
+#   grub    - The GRUB (Legacy or 2) boot loader
+#   windows - Microsoft Windows
+# 默认为: osx
+# 通过取消下边代码前的注释来使用
+#
+#use_graphics_for osx,linux
+
+# 要在工具栏中显示哪些程序
+# 以及指定它们的顺序
+#  shell            - the EFI shell (requires external program; see rEFInd
+#                     documentation for details)
+#  memtest          - the memtest86 program, in EFI/tools, EFI/memtest86,
+#                     EFI/memtest, EFI/tools/memtest86, or EFI/tools/memtest
+#  gptsync          - the (dangerous) gptsync.efi utility (requires external
+#                     program; see rEFInd documentation for details)
+#  gdisk            - the gdisk partitioning program
+#  apple_recovery   - boots the Apple Recovery HD partition, if present
+#  windows_recovery - boots an OEM Windows recovery tool, if present
+#                     (see also the windows_recovery_files option)
+#  mok_tool         - makes available the Machine Owner Key (MOK) maintenance
+#                     tool, MokManager.efi, used on Secure Boot systems
+#  csr_rotate       - adjusts Apple System Integrity Protection (SIP)
+#                     policy. Requires "csr_values" to be set.
+#  install          - an option to install rEFInd from the current location
+#                     to another ESP
+#  bootorder        - adjust the EFI's (NOT rEFInd's) boot order
+#  about            - an "about this program" option
+#  hidden_tags      - manage hidden tags
+#  exit             - a tag to exit from rEFInd
+#  shutdown         - shuts down the computer (a bug causes this to reboot
+#                     many UEFI systems)
+#  reboot           - a tag to reboot the computer
+#  firmware         - a tag to reboot the computer into the firmware's
+#                     user interface (ignored on older computers)
+#  fwupdate         - a tag to update the firmware; launches the fwupx64.efi
+#                     (or similar) program
+#  netboot          - launch the ipxe.efi tool for network (PXE) booting
+# Default is shell,memtest,gdisk,apple_recovery,windows_recovery,mok_tool,about,hidden_tags,shutdown,reboot,firmware,fwupdate
+# To completely disable scanning for all tools, provide a showtools line
+# with no options.
+# 通过取消下边代码前的注释来使用
+#
+#showtools shell, bootorder, gdisk, memtest, mok_tool, apple_recovery, windows_recovery, about, hidden_tags, reboot, exit, firmware, fwupdate
+
+# 让rEFInd在扫描启动项的时候排除某一路径或某一文件
+# 通过取消下边代码前的注释来使用
+#
+#dont_scan_tools ESP2:/EFI/ubuntu/mmx64.efi,gptsync_x64.efi
+
+# 用于引导启动Windows系统还原
+# 一般是品牌笔记本才有这个
+# 默认为 LRS_ESP:/EFI/Microsoft/Boot/LrsBootmgr.efi
+# 通过取消下边代码前的注释来使用
+#
+#windows_recovery_files LRS_ESP:/EFI/Microsoft/Boot/LrsBootmgr.efi
+
+# 让rEFInd在指定目录中搜索 EFI 驱动程序
+# 主要是用于某些没法识别的文件系统
+# 可以放入驱动，指定目录，好让rEFInd识别出来
+# 通过取消下边代码前的注释来使用
+#
+#scan_driver_dirs EFI/tools/drivers,drivers
+
+#  要搜索哪些类型的引导加载程序，以及以什么顺序显示它们：
+#  internal      - 内部基于 EFI 磁盘的引导加载程序
+#  external      - 基于外部 EFI 磁盘的引导加载程序
+#  optical       - EFI 光盘（CD、DVD 等）
+#  netboot       - EFI 网络 (PXE) 启动选项
+#  hdbios        - BIOS 基于磁盘的引导加载程序
+#  biosexternal  - BIOS 外部引导加载程序（USB、eSATA 等）
+#  cd            - BIOS 光盘引导装载程序
+#  manual        - 在此配置文件中使用
+#  firmware      - 在 NVRAM 中的 EFI 引导程序
+#  注意，需要电脑支持才能搜索到，所有不是所有电脑都能搜索到
+#  在 UEFI PC 上，默认为 internal,external,optical,manual
+#  在 Mac 上，默认为 internal,hdbios,external,biosexternal,optical,cd,manual
+#  通过取消下边代码前的注释来使用
+#
+#scanfor internal,external,optical,manual,firmware
+
+# 默认情况下，rEFInd 依赖 UEFI 固件来检测 BIOS 模式
+# 不过，有时可能会无法检测到所有可用设备
+# 对于这种情况，uefi_deep_legacy_scan 会在每次启动时强制扫描和修改 NVRAM 变量
+# 此标记对 Mac 或未通过 scanfor 设置 BIOS 模式选项时无效
+# 默认未设置
+# 通过取消下边代码前的注释来使用
+#
+#uefi_deep_legacy_scan
+
+# 在扫描磁盘之前延迟指定的时间，单位为秒
+# 默认为 0
+# 通过取消下边代码前的注释来使用
+#
+#scan_delay 5
+
+# 一些位于根目录的 EFI 分区扫描不到
+# 可以通过下边的代码添加，以让 rEFInd 扫描到
+# 通过取消下边代码前的注释来使用
+#
+#also_scan_dirs boot,ESP2:EFI/linux/kernels
+
+# 让rEFInd在扫描启动项的时候排除某个卷
+# 通过取消下边代码前的注释来使用
+#
+#dont_scan_volumes "Recovery HD"
+
+# 让rEFInd在扫描启动项的时候排除某一路径
+# 通过取消下边代码前的注释来使用
+#
+#dont_scan_dirs ESP:/EFI/boot,EFI/Dell,EFI/memtest86
+
+# 让rEFInd在扫描启动项的时候排除某个文件
+# 通过取消下边代码前的注释来使用
+#
+#dont_scan_files shim.efi,MokManager.efi
+
+# 让rEFInd在扫描启动项的时候排除某个固件
+# 通过取消下边代码前的注释来使用
+#
+#dont_scan_firmware HARDDISK,shell,"Removable Device"
+
+# 扫描缺少efi文件的Linux系统，对于某些发行版的Linux有用
+# 当设置为“1”、“true”或“on”时
+# 会导致扫描目录中名称以vmlinuz、bzImage或kernel开头的所有文件作为加载程序
+# 即使它们 缺少“.efi”扩展名
+# 当设置为“0”、“false”或“off”时，则不生效
+# 默认为 "true"
+# 通过取消下边代码前的注释来使用
+#
+#scan_all_linux_kernels false
+
+# 将指定目录中的所有 Linux 内核合并到一个条目中
+# 设置后，具有最新时间戳的内核将默认启动
+# 要启动其他内核，用户必须按 F2 或 Insert
+# 备用内核才会作为选项出现在子菜单上
+# 默认值为“true”内核被“折叠”到一个菜单项中。
+# 通过取消下边代码前的注释来使用
+#
+#fold_linux_kernels false
+
+# 用逗号区分字符串列表，以便检测Linux内核版本号
+# 如果您想将“linux-lts”和“linux”都视为版本字符串
+# 必须将它们指定为“linux-lts,linux”
+# 如果内核或 initrd 文件包括指定的字符串和数字
+# 则“版本字符串”需要包括两者
+# 例如，“vmlinuz-linux-4.8”将生成“linux-4.8”的版本字符串
+# 此选项适用于 Arch 和其他在内核文件名中不包含版本号的发行版
+# 如果此功能导致问题
+# 请确保将其设置为空字符串，或注释掉它的选项
+# 默认为没有额外的版本字符串
+# 通过取消下边代码前的注释来使用
+#
+#extra_kernel_version_strings linux-lts,linux
+
+# 通过 EFI 加载程序，例如ELILO 或 GRUB 启动 Linux 时
+# 写入 systemd EFI 变量（目前只有 LoaderDevicePartUUID）
+# 这个变量如果存在，会导致 systemd 将 ESP 挂载到 /boot 或 /efi 下任一空目录
+# 默认为不启用
+# 通过取消下边代码前的注释来使用
+#
+#write_systemd_vars true
+
+# 设置任意时候可以在屏幕上显示的最大图标数
+# 如果发现的加载程序多于此值，rEFInd 会在滚动列表中显示一个子集
+# 如果数值设置得太高，屏幕放不下，则会自动降低到屏幕可以管理的数值
+# 如果此值设置为 0（默认值），则会自动调整到屏幕可以放下的数量
+# 通过取消下边代码前的注释来使用
+#
+#max_tags 0
+
+# 设置默认菜单选项
+# 设置不同的时间对应的不同默认菜单选项
+# 这个时间是以你的主板时间为准
+# 通过取消下边代码前的注释来使用
+#
+#default_selection 1
+#default_selection Microsoft
+#default_selection "+,bzImage,vmlinuz"
+#default_selection Maintenance 23:30 2:00
+#default_selection "Maintenance,macOS" 1:00 2:30
+
+# 这项主要是给使用inter处理器的MAC电脑使用的
+# 开启后可以在MAC电脑的Windows系统上使用虚拟化技术
+# 通过取消下边代码前的注释来使用
+#
+#enable_and_lock_vmx false
+
+# 欺骗 Mac 的 EFI ，让它以为 macOS 即将启动，即使它没有启动
+# 此选项会导致某些 Mac 以不同于正常启动第三方操作系统时的方式初始化其硬件
+# 在某些情况下（特别是在具有多个显卡的 Mac 上）
+# 使用此选项可以让其硬件正常工作，否则其硬件会无法正常工作
+# 另一方面，在非必要的时候使用此选项，会导致硬件（如键盘和鼠标）无法使用
+# 所以，如果您的非 Apple 操作系统可以正常工作，就不要启用此选项
+# 仅当某些硬件设备出现问题时再启用它
+# 需要使用时，数值设置为“10.9”有效，您也可以尝试使用其他值
+# 此功能对非 Apple 计算机无效
+# 默认是不欺骗
+# 通过取消下边代码前的注释来使用
+#
+#spoof_osx_version 10.9
+
+# 为 Apple 的系统完整性保护 (SIP) 功能设置 CSR 值
+# 值是两个字节（四个字符）的十六进制数
+# 这些值定义启用哪些特定安全功能
+# 以下是值含义的代码
+#   CSR_ALLOW_UNTRUSTED_KEXTS            0x0001
+#   CSR_ALLOW_UNRESTRICTED_FS            0x0002
+#   CSR_ALLOW_TASK_FOR_PID               0x0004
+#   CSR_ALLOW_KERNEL_DEBUGGER            0x0008
+#   CSR_ALLOW_APPLE_INTERNAL             0x0010
+#   CSR_ALLOW_UNRESTRICTED_DTRACE        0x0020
+#   CSR_ALLOW_UNRESTRICTED_NVRAM         0x0040
+#   CSR_ALLOW_DEVICE_CONFIGURATION       0x0080
+#   CSR_ALLOW_ANY_RECOVERY_OS            0x0100
+#   CSR_ALLOW_UNAPPROVED_KEXTS           0x0200
+#   CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE 0x0400
+#   CSR_ALLOW_UNAUTHENTICATED_ROOT       0x0800
+#csr_values 10,877
+
+# 配置一个辅助配置文件
+# 这个辅助文件中的代码会被加载运行，但在辅助文件中配置辅助文件（套娃），则不会运行
+# 通过取消下边代码前的注释来使用
+#
+#include manual.conf
+
+# 每个启动节都以“menuentry”关键字开头，后跟一个菜单名称
+# （如果您希望名称包含空格，请使用引号）和一个大括号（“{”），
+# 每个条目都以大括号（“}”）结尾。
+# 每个节中的常用关键字包括：
+#
+#  volume    - identifies the filesystem from which subsequent files
+#              are loaded. You can specify the volume by filesystem
+#              label, by partition label, or by partition GUID number
+#              (but NOT yet by filesystem UUID number).
+#  loader    - identifies the boot loader file
+#  initrd    - Specifies an initial RAM disk file
+#  icon      - specifies a custom boot loader icon
+#  ostype    - OS type code to determine boot options available by
+#              pressing Insert. Valid values are "MacOS", "Linux",
+#              "Windows", and "XOM". Case-sensitive.
+#  graphics  - set to "on" to enable graphics-mode boot (useful
+#              mainly for MacOS) or "off" for text-mode boot.
+#              Default is auto-detected from loader filename.
+#  options   - sets options to be passed to the boot loader; use
+#              quotes if more than one option should be passed or
+#              if any options use characters that might be changed
+#              by rEFInd parsing procedures (=, /, #, or tab).
+#  disabled  - use alone or set to "yes" to disable this entry.
+#
+# 请注意，您可以使用 DOS/Windows/EFI 风格的反斜杠 (\) 或 Unix 风格的正斜杠 (/) 作为目录分隔符
+# 无论哪种方式，所有文件引用都在启动 rEFInd 的 ESP 上
+# 在参数周围使用引号会使它们被解释为一个关键字，并禁用特殊字符（空格、=、/ 和#）的解析
+# 这主要对“options”关键字有用
+# 允许在指定文件名的参数周围使用引号，但是您必须使用反斜杠而不是斜杠
+# 除非您必须将正斜杠传递给加载程序
+# 例如将 root= 选项传递给 Linux 内核
+
+# 下面是几个示例引导节，默认情况下全部禁用
+# 你可以找一个你需要的删除disabled来使用
+
+# 具有 EFI 引导支持的 Linux 3.13 内核的示例
+# 在 GUID 为 904404F8-B481-440C-A1E3-11A5A954E601 的分区上
+# 此条目包括特定于 Linux 的引导选项和规范
+# 初始 RAM 磁盘， 注意 Linux 风格的正斜杠的使用
+# 另请注意，反斜杠在文件规范中也是可选的
+menuentry Linux {
+    icon EFI/refind/icons/os_linux.png
+    volume 904404F8-B481-440C-A1E3-11A5A954E601
+    loader bzImage-3.3.0-rc7
+    initrd initrd-3.3.0.img
+    options "ro root=UUID=5f96cafa-e0a7-4057-b18f-fa709db5b837"
+    disabled
+}
+
+# 下面是一个更复杂的 Linux 示例，专门针对 Arch Linux
+# 此示例必须针对您的特定安装系统进行修改，
+# 如果不出意外，必须改为您的磁盘的 PARTUUID 代码
+# 因为 Arch Linux 在其内核和 initrd 文件名中不包含版本号
+# 所以在 Arch 中使用回退 initrds 或多个内核时，您可能需要使用手动引导节
+# 此示例修改自 rEFInd (https://wiki.archlinux.org/index.php/rEFInd) 上的 Arch wiki 页面中的一个示例
+
+menuentry "Arch Linux" {
+    icon     /EFI/refind/icons/os_arch.png
+    volume   "Arch Linux"
+    loader   /boot/vmlinuz-linux
+    initrd   /boot/initramfs-linux.img
+    options  "root=PARTUUID=5028fa50-0079-4c40-b240-abfaf28693ea rw add_efi_memmap"
+    submenuentry "Boot using fallback initramfs" {
+        initrd /boot/initramfs-linux-fallback.img
+    }
+    submenuentry "Boot to terminal" {
+        add_options "systemd.unit=multi-user.target"
+    }
+    disabled
+}
+
+# 使用标准名称加载 Ubuntu 的示例
+# 它使用 GRUB 2 引导加载程序， 注意 Linux 风格的正斜杠的使用
+
+menuentry Ubuntu {
+    loader /EFI/ubuntu/grubx64.efi
+    icon /EFI/refind/icons/os_linux.png
+    disabled
+}
+
+# 一个最简单的 ELILO 条目
+# 它可能没有提供任何自动检测无法完成的功能
+
+menuentry "ELILO" {
+    loader \EFI\elilo\elilo.efi
+    disabled
+}
+
+# 与 ELILO 条目一样，这个条目不提供任何自动检测功能
+# 但是如果你想禁用自动检测并启动 Windows
+# 你可以使用它
+
+menuentry "Windows 7" {
+    loader \EFI\Microsoft\Boot\bootmgfw.efi
+    disabled
+}
+
+# EFI shell 是类似于引导加载程序的程序，可以用相同的方式启动
+# 您可以将要在“选项”行上运行的脚本的名称传递给 shell
+# 该脚本可以初始化硬件然后启动操作系统
+# 或者它可以做一些完全不同的事情
+
+menuentry "Windows via shell script" {
+    icon \EFI\refind\icons\os_win.png
+    loader \EFI\tools\shell.efi
+    options "fs0:\EFI\tools\launch_windows.nsh"
+    disabled
+}
+
+# 使MacOS 正常检测并自动运行
+# 但是，如果您想做一些不寻常的事情，手动引导也是可以的
+# 这个没有什么不同之处，但它可以作为一个起点
+# 注意，你必须更改 "volume" 此示例才能工作
+
+menuentry "My macOS" {
+    icon \EFI\refind\icons\os_mac.png
+    volume "macOS boot"
+    loader \System\Library\CoreServices\boot.efi
+    disabled
+}
+
+# firmware_bootnum 令牌采用HEXADECIMAL 值作为选项
+# 使用 EFI 的 BootNext 变量设置该值，然后重新启动计算机
+# 然后，这会导致使用此 EFI 启动选项，一次性启动计算机
+# 它可以用于各种目的，但一些 rEFInd 用户可能会感兴趣的是
+# 一些带有 HiDPI 显示器的 Mac 在通过 rEFInd 启动时产生的桌面分辨率
+# 低于通过 Apple 自己的启动管理器启动时的分辨率
+# 使用 firmware_bootnum 选项引导可以产生更好的分辨率
+# 请注意，在这种类型的配置中没有使用加载程序选项
+
+menuentry "macOS via BootNext" {
+    icon /EFI/refind/icons/os_mac.png
+    firmware_bootnum 80
+    disabled
+}
+
+
+
+
+
+# 上边的代码大概看看就行了
+# 最重要的，你需要DIY的选项其实就只有下边这几个
+# 可以通过取消下边代码前的注释 # 来使用
+# 但建议复制后到最下方另起一行粘贴使用
+
+# 这是主题配置文件的路径，使用主题就必须要设置
+# include themes/rEFInd-minimal/theme.conf
+
+# 设置屏幕分辨率（改后边两个数字）
+# 设置为resolution max 则启用显示器支持的最大分辨率
+# resolution 1920 1080
+
+# 设置壁纸及壁纸路径，优先级大于主题（改后边的文件名和路径）
+# 需要先将图片放到EFI/refind/icons文件夹内，支持JPG、PNG
+# banner Light.jpg
+# banner icons/Light.jpg
+
+# 设置壁纸和屏幕分辨率不同时的适应方式（改后边那段）
+# 可以选择下边两种：
+# noscale=如果太大则裁剪，如果太小则显示黑边
+# fillscreen=铺满屏幕
+#
+#banner_scale fillscreen
+
+# 设置图标的显示大小，图标都是正方形的，单位为像素
+# The big_icon_size 用于设置第一排的系统引导图标大小
+# small_icon_size 用于设置第二排的选项图标大小
+#
+#big_icon_size 256
+#small_icon_size 96
+
+# 设置默认进入第几个系统
+#default_selection 1
+
+# 设置默认进入哪个系统
+#default_selection Microsoft
+
+# 设置进入默认系统的等待时间，单位为秒
+# 如果想禁用，可以将其设置为 -1
+# 读秒期间按任意键可以终止自启动
+#
+#timeout 20
+
+# 下边三个代码可以解决rEFInd扫出一大堆奇怪的启动项的问题
+# 不要扫描哪个目录
+#dont_scan_dirs ESP:/EFI/boot
+
+# 不要扫描哪个文件
+#dont_scan_files shim.efi
+
+# 不要扫描哪个分区
+#dont_scan_volumes "Recovery HD"
+
+
+# 手动指定在主菜单显示的引导选项，必须按照下边的示例格式写
+# 以 Windows 11 为例
+# menuentry 后边的为选项显示名称
+# icon /EFI/refind/icons/os_win.png 为图标路径
+# loader /EFI/Microsoft/Boot/bootmgfw.efi 为EFI引导文件的路径
+# 删除disabled以使代码生效
+
+menuentry "Windows 11" {
+    icon /EFI/refind/icons/os_win11.png
+    loader /EFI/Microsoft/Boot/bootmgfw.efi
+    disabled
+}
