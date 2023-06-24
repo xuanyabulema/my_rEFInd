@@ -3,5 +3,5 @@
 
 
 
-[rEFInd 配置参数中文文档](./rEFInd 配置参数文档.md)：来自 [rEFInd 配置参数文档](https://github.com/nixevol/rEFInd-zh_cn)
+[rEFInd 配置参数中文文档](./rEFInd配置参数文档.md)：来自 [rEFInd 配置参数文档](https://github.com/nixevol/rEFInd-zh_cn)
 
